@@ -20,18 +20,18 @@ local keybind = section.keybind;
 local dropdown_drop = allbot.main.content.extra.dropdown;
 dropdown_drop.ZIndex = 4;
 
-for _, child in next, dropdown_drop:GetChildren() do
+for i, child in next, dropdown_drop:GetDescendants() do
 
-	child.ZIndex = 5;
+	child.ZIndex = 5 + i;
 
 end;
 
 local colorpicker_drop = allbot.main.content.extra.colorpicker;
 colorpicker_drop.ZIndex = 4;
 
-for _, child in next, colorpicker_drop:GetChildren() do
+for i, child in next, colorpicker_drop:GetDescendants() do
 
-	child.ZIndex = 5;
+	child.ZIndex = 5 + i;
 
 end;
 
