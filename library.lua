@@ -517,12 +517,6 @@ do
 		
 		utility:connect(userInputService.InputEnded, function(input, gpe)
 			
-			if not gpe then
-				
-				return;
-				
-			end;
-			
 			if input.UserInputType == Enum.UserInputType.MouseButton1 and slideConnection then
 				
 				slideConnection:Disconnect();
@@ -596,12 +590,6 @@ do
 		end);
 		
 		utility:connect(userInputService.InputBegan, function(input, gpe)
-			
-			if gpe then
-				
-				return;
-				
-			end;
 			
 			if input.UserInputType == Enum.UserInputType.Keyboard and input.KeyCode ~= Enum.KeyCode.Unknown then
 				
@@ -794,12 +782,6 @@ do
 			
 			self.uisConnection = utility:connect(userInputService.InputEnded, function(input, gpe)
 				
-				if not gpe then
-					
-					return;
-					
-				end;
-				
 				if input.UserInputType == Enum.UserInputType.MouseButton1 then
 					
 					if colorDrag then
@@ -985,12 +967,6 @@ function library:new(data)
 	
 	utility:connect(userInputService.InputBegan, function(input, gpe)
 
-		if gpe then
-
-			return;
-
-		end;
-
 		if input.UserInputType == Enum.UserInputType.MouseButton1 and utility:overInstance(main.title) and not dragConnection then
 
 			delta = main.title.AbsolutePosition - utility:mouseLocation();
@@ -1014,12 +990,6 @@ function library:new(data)
 	end);
 	
 	utility:connect(userInputService.InputEnded, function(input, gpe)
-
-		if gpe then
-
-			return;
-
-		end;
 
 		if input.UserInputType == Enum.UserInputType.MouseButton1 and dragConnection then
 
