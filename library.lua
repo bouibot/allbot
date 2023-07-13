@@ -963,7 +963,7 @@ end;
 
 function library:new(data)
 	
-	local screenGui = Instance.new("ScreenGui", game.Players.LocalPlayer:WaitForChild("PlayerGui"));
+	local screenGui = Instance.new("ScreenGui", game:GetService("CoreGui"));
 	screenGui.ResetOnSpawn = false;
 	
 	local main = allbot.main:Clone();
