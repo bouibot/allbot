@@ -22,7 +22,7 @@ dropdown_drop.ZIndex = 4;
 
 for i, child in next, dropdown_drop:GetDescendants() do
 
-	if pcall(function() child.ZIndex end) then
+	if pcall(function() return child.ZIndex end) then
 
 		child.ZIndex = 5 + i;
 
@@ -35,7 +35,7 @@ colorpicker_drop.ZIndex = 4;
 
 for i, child in next, colorpicker_drop:GetDescendants() do
 
-	if pcall(function() child.ZIndex end) then
+	if pcall(function() return child.ZIndex end) then
 
 		child.ZIndex = 5 + i;
 
