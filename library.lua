@@ -855,11 +855,12 @@ do
 	
 	function tabClass:update()
 		
+        self.frame.Size = UDim2.new(1 / #self.window.tabs, 0, 1, 0);
+		self.frame.Position = UDim2.new((table.find(self.window.tabs, self) - 1) * (1 / #self.window.tabs), 0, 0, 0);
+
 		if self.window.selected == self then
 			
 			self.frame.UIGradient.Color = ColorSequence.new(Color3.fromRGB(65, 65, 65), Color3.fromRGB(45, 45,45));
-			self.frame.Size = UDim2.new(1 / #self.window.tabs, 0, 1, 0);
-			self.frame.Position = UDim2.new((table.find(self.window.tabs, self) - 1) * (1 / #self.window.tabs), 0, 0, 0);
 			self.window.remover.Size = UDim2.new(self.frame.Size.X.Scale, -2, 0, 1);
 			self.window.remover.Position = UDim2.new(self.frame.Position.X.Scale, 1, 1, 0);
 			
@@ -1048,6 +1049,8 @@ function library:new(data)
 			window:select(tab);
 
 		end);
+
+        window:update();
 		
 		return tab;
 		
