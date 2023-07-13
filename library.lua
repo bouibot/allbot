@@ -896,8 +896,8 @@ do
 
 					for i, section in next, side:GetChildren() do
 
-                        			section.Position = UDim2.new(0, 4, 0, 5 + previous + (i-1) * 15);
-                        			previous += section.AbsoluteSize.Y;
+			                        section.Position = UDim2.new(0, 4, 0, 5 + previous + (i-1) * 15);
+			                        previous += section.AbsoluteSize.Y;
 
 						totalSize += section.Size.Y.Offset + 15;
 						
@@ -906,6 +906,8 @@ do
 					side.CanvasSize = UDim2.new(0, 0, 0, math.max(totalSize, 0));
 					
 				end;
+				
+			end;
 			
 			self.content.Visible = true;
 			
