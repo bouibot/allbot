@@ -41,7 +41,7 @@ function get_custom_asset(path)
 
     if not isfile(path) then
 
-        local response = request({Method = "GET", Url = link .. string.gsub(path, "allbot/assets/", "allbot/")}).Body;
+        local response = request({Method = "GET", Url = link .. string.gsub(path, "allbot/", "")}).Body;
 
         writefile(path, response);
 
