@@ -18,7 +18,10 @@ local colorpicker = section.colorpicker;
 local keybind = section.keybind;
 
 local dropdown_drop = allbot.main.content.extra.dropdown;
+dropdown_drop.ZIndex = 4;
+
 local colorpicker_drop = allbot.main.content.extra.colorpicker;
+colorpicker_drop.ZIndex = 4;
 
 local request = request or http_request or (syn and syn.request);
 local getcustomasset = getsynasset or getcustomasset;
