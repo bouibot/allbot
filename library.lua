@@ -308,6 +308,7 @@ do
 				button.title.TextColor3 = table.find(self.value, option) and Color3.fromRGB(255, 255, 255) or Color3.fromRGB(170, 170, 170);
 				button.Position = UDim2.new(0, 0, 0, 25 * (i - 1));
 				button.Parent = drop;
+				button.ZIndex = 123;
 				
 				utility:connect(button.MouseButton1Click, function()
 					
