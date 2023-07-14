@@ -24,7 +24,7 @@ for i, child in next, dropdown_drop:GetDescendants() do
 
 	if pcall(function() return child.ZIndex end) then
 
-		child.ZIndex = 5 + i;
+		child.ZIndex = 5;
 
 	end;
 
