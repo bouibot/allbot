@@ -1,4 +1,6 @@
 # allbot
 
+[discord server](https://discord.gg/UrQuMQbPmY)
+
 <p align="center">
-Best roblox hub! Join community: [discord server](https://discord.gg/UrQuMQbPmY)
+Best roblox hub!
