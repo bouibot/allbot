@@ -295,9 +295,9 @@ do
 			
 			local drop = dropdown_drop:Clone();
 			drop.Size = UDim2.new(0.5, -14, 0, #self.options * 25);
-			drop.Position = UDim2.new(self.section.side / 2, 7, 0, self.frame.Position.Y.Offset + 60);
+			drop.Position = UDim2.new(self.section.side / 2, 7, 0, self.section.frame.Position.Y.Offset + self.frame.Position.Y.Offset + 60 - self.section.frame.Parent.CanvasPosition.Y);
 			drop.Parent = self.section.tab.content.extra;
-			
+
 			local button_sample = drop.button:Clone();
 			drop.button:Destroy();
 			
@@ -342,7 +342,7 @@ do
 			
 			self.connection = utility:connect(runService.RenderStepped, function()
 				
-				drop.Position = UDim2.new(self.section.side / 2, 7, 0, self.frame.Position.Y.Offset + 60);
+				drop.Position = UDim2.new(self.section.side / 2, 7, 0, self.section.frame.Position.Y.Offset + self.frame.Position.Y.Offset + 60 - self.section.frame.Parent.CanvasPosition.Y);
 				
 			end);
 			
