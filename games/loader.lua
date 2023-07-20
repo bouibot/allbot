@@ -41,6 +41,7 @@ do
 
     local supported = {
         [111958650] = "arsenal";
+        [115797356] = "cbro";
     };
     
     function loader:toggle()
