@@ -252,7 +252,7 @@ do
 
             for _, dataFunction in next, self.new.update do
                 
-                dataFunction(data, true, calculatedSize, position);
+                dataFunction(player, data, true, calculatedSize, position);
 
             end;
 
@@ -302,7 +302,7 @@ do
 
             for _, dataFunction in next, self.new.update do
                 
-                dataFunction(data, false, Vector2.zero, position);
+                dataFunction(player, data, false, Vector2.zero, position);
 
             end;
 
