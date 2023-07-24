@@ -16,8 +16,6 @@ do
     end;
 
     function esp:newOption(type, visible, color, transparency)
-        
-        assert(self.new[type] == nil, string.format("Type %s already exists.", type));
 
         self.settings[type] = {visible == nil and false or visible, color or Color3.new(1, 1, 1), transparency or 0};
 
