@@ -4,7 +4,7 @@ do
     
     function cursor:getModes()
         
-        return {"default", "normal", "nazi"}
+        return {"default", "trapezium", "nazi"}
 
     end;
 
