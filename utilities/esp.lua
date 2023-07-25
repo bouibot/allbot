@@ -193,8 +193,8 @@ do
                 
                 local position, size = player.Character:GetBoundingBox();
 
-                local addX = (camera.CFrame - camera.CFrame.p) * Vector3.new(math.clamp(math.abs(size.X / 2) + 0.5, 0, 4), 0, 0);
-                local addY = (camera.CFrame - camera.CFrame.p) * Vector3.new(0, math.clamp(math.abs(size.Y / 2) + 0.5, 0, 4), 0);
+                local addX = (camera.CFrame - camera.CFrame.p) * Vector3.new(math.clamp(math.abs(size.X / 2) + 0.5, 0, 2), 0, 0);
+                local addY = (camera.CFrame - camera.CFrame.p) * Vector3.new(0, math.clamp(math.abs(size.Y / 2) + 0.5, 0, 3), 0);
 
                 local left = camera:WorldToViewportPoint(position.p + addX);
                 local right = camera:WorldToViewportPoint(position.p - addX);
