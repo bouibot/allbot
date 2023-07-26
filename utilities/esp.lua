@@ -256,9 +256,11 @@ do
 
         else
 
-            local angle = math.acos(position.X);
+            local direction = position2d - (camera.ViewportSize / 2);
 
-            local unit = position2d.Unit;
+            local angle = math.atan2(direction.Y, direction.X);
+
+            local unit = Vector2.new(math.cos(angle), math.sin(angle));
 
             if self.settings.pointer[1] then
                 
