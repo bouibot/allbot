@@ -166,7 +166,7 @@ do
 
         for _, draw in next, self.outlines do
             
-            draw.Visible = self.visible and self.outline or self.visible;
+            draw.Visible = self.visible and self.outline or false;
 
         end;
 
@@ -222,7 +222,7 @@ do
 
         for _, draw in next, self.outlines do
             
-            draw.Visible = self.visible and self.outline or self.visible;
+            draw.Visible = self.visible and self.outline or false;
 
         end;
 
