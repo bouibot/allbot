@@ -1,4 +1,4 @@
-local cursor = {angle = 0, visible = false, from = Vector2.zero, gap = 0, radius = 10, color = Color3.new(1, 1, 1), mode = "default", instances = {}};
+local cursor = {angle = 0, visible = false, outline = false, dot = false, from = Vector2.zero, gap = 0, radius = 10, color = Color3.new(1, 1, 1), outlineColor = Color3.new(0, 0, 0), mode = "default", instances = {}, outlines = {}, dots = {}};
 
 do
     
@@ -22,6 +22,12 @@ do
 
     end;
 
+    function cursor:floorVector2(vector)
+        
+        return Vector2.new(math.floor(vector.X), math.floor(vector.Y));
+
+    end;
+
     function cursor:update()
         
         if not self.visible then
@@ -39,6 +45,16 @@ do
                 draw.Color = self.color;
                 draw.From = self.from + Vector2.new(math.cos(angle), math.sin(angle)) * self.gap;
                 draw.To = self.from + Vector2.new(math.cos(angle), math.sin(angle)) * (self.radius + self.gap);
+
+            end;
+
+            for count, draw in next, self.outlines do
+                
+                local angle = math.rad(self.angle + (count * 90));
+
+                draw.Color = self.outlineColor;
+                draw.From = self.from + Vector2.new(math.cos(angle), math.sin(angle)) * (self.gap - 1);
+                draw.To = self.from + Vector2.new(math.cos(angle), math.sin(angle)) * (self.radius + self.gap + 1);
 
             end;
 
@@ -71,6 +87,31 @@ do
 
             end;
 
+            for count, draw in next, self.outlines do
+
+                local angle = math.rad(self.angle + (count < 5 and count * 90 or count * 90 - 45));
+                local increase = count > 4 and math.sqrt(2) or 1;
+
+                draw.Color = self.outlineColor;
+
+                local from, to = self.from + Vector2.new(math.cos(angle), math.sin(angle)) * (self.gap - 1) * increase, self.from + Vector2.new(math.cos(angle), math.sin(angle)) * (self.radius + self.gap + 1) * increase;
+                
+                if count < 5 then
+                    
+                    saved[count] = to;
+
+                    draw.From = from;
+                    draw.To = to;
+
+                else
+
+                    draw.From = saved[count - 4];
+                    draw.To = to;
+
+                end;
+
+            end;
+
         elseif self.mode == "trapezium" then
 
             for count, draw in next, self.instances do
@@ -84,7 +125,56 @@ do
 
             end;
 
+            for count, draw in next, self.outlines do
+
+                local angle = math.rad(self.angle + count * 90 - 45);
+                local increase = count > 2 and math.sqrt(2) or 1;
+
+                draw.Color = self.outlineColor;
+                draw.From = self.from + Vector2.new(math.cos(angle), math.sin(angle)) * (self.gap - 1) * increase;
+                draw.To = self.from + Vector2.new(math.cos(angle), math.sin(angle)) * (self.gap + self.radius + 1) * increase;
+
+            end;
+
         end;
+
+        for count = 1, 2 do
+            
+            self.dots[count].Position = self.from - (self.dots[1].Size / 2) - (Vector2.new(1, 1) * (count - 1));
+            self.dots[count].Color = count == 1 and self.color or self.outlineColor;
+            self.dots[count].Visible = count == 1 and self.visible or count == 2 and self.visible and self.outline;
+
+        end;
+
+    end;
+
+    function cursor:update_dot(enabled)
+        
+        self.dot = enabled;
+
+        for count = 1, 2 do
+            
+            self.dots[count].Visible = count == 1 and self.visible or count == 2 and self.visible and self.outline;
+
+        end;
+
+    end;
+
+    function cursor:update_outline(enabled)
+        
+        self.outline = enabled;
+
+        for _, draw in next, self.outlines do
+            
+            draw.Visible = self.visible and self.outline or self.visible;
+
+        end;
+
+    end;
+
+    function cursor:update_outline_color(new)
+        
+        self.outlineColor = new;
 
     end;
 
@@ -108,7 +198,7 @@ do
 
     function cursor:update_from(from)
         
-        self.from = from;
+        self.from = self:floorVector2(from);
 
     end;
 
@@ -130,6 +220,18 @@ do
 
         end;
 
+        for _, draw in next, self.outlines do
+            
+            draw.Visible = self.visible and self.outline or self.visible;
+
+        end;
+
+        for count = 1, 2 do
+            
+            self.dots[count].Visible = count == 1 and self.visible or count == 2 and self.visible and self.outline;
+
+        end;
+
     end;
 
     function cursor:update_color(color)
@@ -146,13 +248,20 @@ do
 
         end;
 
+        for _, draw in next, self.outlines do
+            
+            draw:Remove();
+
+        end;
+
         table.clear(self.instances);
+        table.clear(self.outlines);
 
         if self.mode == "default" then
             
             for count = 1, 4 do
                 
-                self.instances[count] = self:newDrawing("Line", {Thickness = 2});
+                self.instances[count] = self:newDrawing("Line", {Thickness = 1});
 
             end;
 
@@ -160,7 +269,7 @@ do
             
             for count = 1, 8 do
                 
-                self.instances[count] = self:newDrawing("Line", {Thickness = 2});
+                self.instances[count] = self:newDrawing("Line", {Thickness = 1});
 
             end;
 
@@ -168,12 +277,24 @@ do
 
             for count = 1, 4 do
                 
-                self.instances[count] = self:newDrawing("Line", {Thickness = 2});
+                self.instances[count] = self:newDrawing("Line", {Thickness = 1});
 
             end;
 
         end;
 
+        for count, draw in next, self.instances do
+            
+            self.outlines[count] = self:newDrawing("Line", {Thickness = draw.Thickness + 2, ZIndex = draw.ZIndex - 1});
+
+        end;
+
+        for count = 1, 2 do
+            
+            self.dots[count] = self:newDrawing("Square", {Filled = true, ZIndex = 2 - count, Size = Vector2.new(2, 2) + Vector2.new(2, 2) * (count - 1)});
+
+        end;
+        
     end;
 
     cursor:init();
