@@ -977,7 +977,7 @@ function library:new(data)
 	main.Visible = false;
 	main.Parent = screenGui;
 	main.title.Text = data.title or "AllBot";
-	main.image:Destroy();
+	main.mrbeast:Destroy();
 	
 	local content = main.content;
 	
