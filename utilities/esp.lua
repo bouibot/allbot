@@ -258,7 +258,7 @@ do
 
             local direction = position2d - (camera.ViewportSize / 2);
 
-            local angle = math.atan2(direction.Y, direction.X);
+            local angle = math.atan2(direction.Y, direction.X) - math.rad(50);
 
             local unit = Vector2.new(math.cos(angle), math.sin(angle));
 
